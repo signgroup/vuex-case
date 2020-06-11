@@ -8,7 +8,7 @@
                 <router-link to="/index-import">CountImport</router-link>
             </el-menu-item>
         </el-menu>
-        <a class="Header-link" href="https://github.com/" data-hotkey="g d" aria-label="Homepage "
+        <a class="Header-link" href="https://github.com/signgroup/vuex-count.git " data-hotkey="g d" aria-label="Homepage "
            data-ga-click="Header, go to dashboard, icon:logo">
             <svg class="octicon octicon-mark-github v-align-middle" height="34" viewBox="0 0 17 17" version="1.1"
                  width="34" aria-hidden="true">
