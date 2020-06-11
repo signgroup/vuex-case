@@ -21,8 +21,8 @@ yarn lint
 ```
 
 ### 版本
-vue 2.6.x
-vue-cli 3.x
+- vue 2.6.x
+- vue-cli 3.x
 
 ### 案例优化
 + element 组件按需加载
