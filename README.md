@@ -41,4 +41,4 @@ vue ui
 + 拖动更改todo数据实时更新数据
 
 ### 预览地址
-[vue-count](http://13s.top/demo/vuex-case)
+[点我](http://13s.top/demo/vuex-case)
