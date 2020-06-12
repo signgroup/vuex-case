@@ -5,7 +5,7 @@
                 $store形式
             </el-form-item>
             <el-form-item label="当前值">
-                <!--<p>当前最新数量是[{{$store.state.count}}]</p>-->
+                <!--<p>当前最新数量是[{{$store.state.moduleCount.count}}]</p>-->
                 <p>{{$store.getters.showNum}}</p>
             </el-form-item>
             <el-form-item label="每次加减">
@@ -47,7 +47,7 @@
                 let time = this.time
                 let timer = setInterval(() => {
                     time--
-                    console.log(time)
+                    // console.log(time)
                     if (time <= 0) {
                         clearInterval(timer);
                         this.loading = false
@@ -55,10 +55,10 @@
                 }, 1000)
             },
             add() {
-                this.$store.commit('addMutations', this.counterNum)
+                this.$store.commit('addCountMutation', this.counterNum)
             },
             reduce() {
-                this.$store.commit('reduceMutations', this.counterNum)
+                this.$store.commit('reduceCountMutation', this.counterNum)
             }
         },
         watch: {

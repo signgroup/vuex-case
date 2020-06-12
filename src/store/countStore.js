@@ -1,25 +1,20 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-
-Vue.use(Vuex)
-
 const countDown = (mutations, context, data) => {
     setTimeout(() => {
         context.commit(mutations, data.counterNum)
     }, data.time * 1000)
 }
-
-export default new Vuex.Store({
+export const  moduleCount = {
     state: {
         count: 0
     },
     mutations: {
-        addMutations(state, num) {
+        addCountMutation(state, num) {
             state.count += num
         },
-        reduceMutations(state, num) {
+        reduceCountMutation(state, num) {
             state.count -= num
-        }
+        },
+
     },
     getters: {
         showNum(state) {
@@ -28,10 +23,10 @@ export default new Vuex.Store({
     },
     actions: {
         addAsyncAction(context, data) {
-            countDown('addMutations', context, data)
+            countDown('addCountMutation', context, data)
         },
         reduceAsyncAction(context, data) {
-            countDown('reduceMutations', context, data)
+            countDown('reduceCountMutation', context, data)
         }
     }
-})
+}

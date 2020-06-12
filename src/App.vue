@@ -7,8 +7,12 @@
             <el-menu-item index="2">
                 <router-link to="/index-import">CountImport</router-link>
             </el-menu-item>
+            <el-menu-item index="3">
+                <router-link to="/todo-list">TodoList</router-link>
+            </el-menu-item>
         </el-menu>
-        <a class="Header-link" href="https://github.com/signgroup/vuex-count.git " data-hotkey="g d" aria-label="Homepage "
+        <a class="Header-link" href="https://github.com/signgroup/vuex-case.git " data-hotkey="g d"
+           aria-label="Homepage "
            data-ga-click="Header, go to dashboard, icon:logo">
             <svg class="octicon octicon-mark-github v-align-middle" height="34" viewBox="0 0 17 17" version="1.1"
                  width="34" aria-hidden="true">
@@ -26,11 +30,29 @@
     export default {
         name: 'app',
         data() {
-            return {activeIndex: '1'}
+            return {activeIndex: ''}
         },
         components: {
             'el-menu': Menu,
             'el-menu-item': MenuItem
+        },
+        watch: {
+            '$route'(val) {
+                switch (val.name) {
+                    case 'index-store':
+                        this.activeIndex = '1'
+                        break
+                    case 'index-import':
+                        this.activeIndex = '2'
+                        break
+                    case 'todo-list':
+                        this.activeIndex = '3'
+                        break
+                    default:
+                        this.activeIndex = '1'
+                        break
+                }
+            }
         }
     }
 </script>

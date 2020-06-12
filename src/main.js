@@ -7,7 +7,7 @@ import Vuex from 'vuex'
 import {Button, Input, Form, FormItem, InputNumber} from 'element-ui'
 import "./assets/common.less";
 import router from './router'
-import store from './store'
+import store from './store/store'
 
 Vue.config.productionTip = false
 Vue.use(Button)

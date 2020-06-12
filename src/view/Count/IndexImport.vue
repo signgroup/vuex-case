@@ -13,8 +13,8 @@
                 <el-input class="count-input" type="number" v-model="counterNum"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="addMutations(counterNum)">+</el-button>
-                <el-button @click="reduceMutations(counterNum)">-</el-button>
+                <el-button type="primary" @click="addCountMutation(counterNum)">+</el-button>
+                <el-button @click="reduceCountMutation(counterNum)">-</el-button>
             </el-form-item>
             <el-form-item label="异步加减">
                 <el-input-number class="input-number" v-model="time" :min="1" :max="10"
@@ -43,11 +43,14 @@
             }
         },
         computed: {
-            ...mapState(['count']),
+            // ...mapState(['count']), //不加module
+            ...mapState({
+                count: state =>state.moduleCount.count
+            }),
             ...mapGetters(['showNum'])
         },
         methods: {
-            ...mapMutations(['addMutations', 'reduceMutations']),
+            ...mapMutations(['addCountMutation', 'reduceCountMutation']),
             ...mapActions(['addAsyncAction', 'reduceAsyncAction']),
             asyncDispatch(action) {
                 this.loading = true
@@ -58,7 +61,7 @@
                 let time = this.time
                 let timer = setInterval(() => {
                     time--
-                    console.log(time)
+                    // console.log(time)
                     if (time <= 0) {
                         clearInterval(timer);
                         this.loading = false
