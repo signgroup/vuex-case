@@ -7,7 +7,7 @@
                 <p>{{$store.getters.showNum}}</p>
             </el-form-item>
             <el-form-item label="每次加减">
-                <el-input class="count-input" type="number" v-model="counterNum"></el-input>
+                <el-input class="count-input" type="number" v-model.number="counterNum"></el-input>
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="add">+</el-button>
@@ -61,10 +61,10 @@
         },
         watch: {
             counterNum(val) {
-                this.counterNum = val !== '' ? parseInt(val) : 1
+                this.counterNum = val !== '' ? val : 1
             },
             time(val) {
-                this.time = parseInt(val) > 0 ? parseInt(val) : 1
+                this.time = val > 0 ? val : 1
             }
         },
     }
