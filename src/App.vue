@@ -2,13 +2,16 @@
     <div id="app">
         <el-menu :default-active="activeIndex" mode="horizontal">
             <el-menu-item index="1">
-                <router-link to="/index-store">CountStore</router-link>
+                <router-link to="/count-store">CountStore</router-link>
             </el-menu-item>
             <el-menu-item index="2">
-                <router-link to="/index-import">CountImport</router-link>
+                <router-link to="/count-import">CountImport</router-link>
             </el-menu-item>
             <el-menu-item index="3">
-                <router-link to="/todo-list">TodoList</router-link>
+                <router-link to="/todo-store">TodoStore</router-link>
+            </el-menu-item>
+            <el-menu-item index="4">
+                <router-link to="/todo-import">TodoImport</router-link>
             </el-menu-item>
         </el-menu>
         <a class="Header-link" href="https://github.com/signgroup/vuex-case.git " data-hotkey="g d"
@@ -39,14 +42,17 @@
         watch: {
             '$route'(val) {
                 switch (val.name) {
-                    case 'index-store':
+                    case 'count-store':
                         this.activeIndex = '1'
                         break
-                    case 'index-import':
+                    case 'count-import':
                         this.activeIndex = '2'
                         break
-                    case 'todo-list':
+                    case 'todo-store':
                         this.activeIndex = '3'
+                        break
+                    case 'todo-import':
+                        this.activeIndex = '4'
                         break
                     default:
                         this.activeIndex = '1'

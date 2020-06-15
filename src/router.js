@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-const IndexStore = r => require.ensure([], () => r(require('@/view/Count/IndexStore')), 'count-store')
-const IndexImport = () => import(/* webpackChunkName: "count-import" */ './view/Count/IndexImport')
-const TodoList = () => import(/* webpackChunkName: "count-import" */ './view/Todo/Index')
+const CountStore = r => require.ensure([], () => r(require('@/view/Count/CountStore')), 'count-store')
+const CountImport = () => import(/* webpackChunkName: "count-import" */ './view/Count/CountImport')
+const TodoStore = () => import(/* webpackChunkName: "count-store" */ './view/Todo/TodoStore')
+const TodoImport = () => import(/* webpackChunkName: "count-import" */ './view/Todo/TodoImport')
 
 Vue.use(Router)
 
@@ -11,23 +12,28 @@ export default new Router({
     routes: [
         {
             path: '/',
-            name: 'index-store',
-            component: IndexStore
+            name: 'count-store',
+            component: CountStore
         },
         {
-            path: '/index-store',
-            name: 'index-store',
-            component: IndexStore
+            path: '/count-store',
+            name: 'count-store',
+            component: CountStore
         },
         {
-            path: '/index-import',
-            name: 'index-import',
-            component: IndexImport
+            path: '/count-import',
+            name: 'count-import',
+            component: CountImport
         },
         {
-            path: '/todo-list',
-            name: 'todo-list',
-            component: TodoList
+            path: '/todo-store',
+            name: 'todo-store',
+            component: TodoStore
+        },
+        {
+            path: '/todo-import',
+            name: 'todo-import',
+            component: TodoImport
         }
     ]
 })

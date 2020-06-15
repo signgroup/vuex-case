@@ -1,24 +1,24 @@
 <template>
     <div class="TodoIndex">
+        <h3>{{importFrom}}</h3>
         <el-input placeholder="请输入内容" v-model="inputValue" @keyup.enter.native="addItem">
             <Select v-model="select" slot="prepend" placeholder="请选择" class="type-select">
-                <Option v-for="item in ($store.getters.getTypeOptions)" :label="item.name" :value="item.type"></Option>
+                <Option v-for="item in getTypeOptions" :label="item.name" :value="item.type"></Option>
             </Select>
             <el-button slot="append" @click="addItem">添加</el-button>
         </el-input>
-        <draggable v-model="listData" @update="datadragEnd" :options="{animation:500}">
+        <draggable v-model="listDataUpdate" @update="dragEnd" :options="{animation:500}">
             <transition-group>
                 <div class="todo-item" v-for="item in listData" :key="item.id">
                     <Alert :title="item.content" :type="item.type" :closable="false">
                         <el-button type="primary" size="mini" icon="el-icon-edit" circle
                                    @click="updateItem(item)"></el-button>
                         <el-button type="danger" size="mini" icon="el-icon-delete" circle
-                                   @click="deleteItem(item.id)"></el-button>
+                                   @click="deleteTodoMutation(item.id)"></el-button>
                     </Alert>
                 </div>
             </transition-group>
         </draggable>
-        
         <Dialog
         title="提示"
         :close-on-click-modal="false"
@@ -45,31 +45,35 @@
             </span>
         </Dialog>
     </div>
-
 </template>
 <script>
     import {Alert, Select, Option, Dialog, Message} from 'element-ui'
+    import {mapState, mapMutations, mapGetters} from 'vuex'
     import draggable from 'vuedraggable'
 
     export default {
         name: "TodoIndex",
         data() {
             return {
-                colors: [],
                 select: 'error',
                 inputValue: '',
-                listData: this.$store.state.moduleTodo.list,
                 dialogVisible: false,
-                itemData: {}
+                itemData: {},
+                listDataUpdate: []
             }
         },
         components: {
             draggable, Alert, Select, Option, Dialog
         },
+        computed: {
+            ...mapState({
+                listData: state => state.moduleTodo.list,
+            }),
+            ...mapGetters(['getTypeOptions','importFrom']),
+        },
+
         methods: {
-            deleteItem(id) {
-                this.$store.commit('deleteTodoMutation', id)
-            },
+            ...mapMutations(['addTodoMutation', 'updateTodoMutation', 'deleteTodoMutation', 'updateTodoList']),
             updateItem(item) {
                 this.itemData = {...item}
                 this.dialogVisible = true
@@ -83,7 +87,7 @@
                     })
                     return
                 }
-                this.$store.commit('addTodoMutation', {
+                this.addTodoMutation({
                     content: this.inputValue.trim(),
                     type: this.select
                 })
@@ -98,16 +102,17 @@
                     })
                     return
                 }
-                this.$store.commit('updateTodoMutation', this.itemData)
+                this.updateTodoMutation(this.itemData)
                 this.dialogVisible = false
                 this.inputValue = ''
 
             },
-            datadragEnd(evt) {
+            dragEnd(evt) {
                 evt.preventDefault();
+                console.log(this.listDataUpdate)
                 /*console.log('拖动前的索引 :' + evt.oldIndex)
                 console.log('拖动后的索引 :' + evt.newIndex)*/
-                this.$store.commit('updateTodoList', this.listData)
+                this.updateTodoList(this.listDataUpdate)
             }
         },
         mounted() {
@@ -116,22 +121,11 @@
                 event.preventDefault();
                 event.stopPropagation();
             }
+            this.listDataUpdate = this.listData
         }
     }
 </script>
 
 <style lang="less" scoped>
-    .TodoIndex {
-        padding: 20px;
-        .type-select {
-            width: 120px;
-        }
-        .todo-item {
-            margin-top: 10px;
-            cursor: grab;
-        }
-        .dialog-select {
-            width: 100%;
-        }
-    }
+    @import "./../../assets/todo-index";
 </style>

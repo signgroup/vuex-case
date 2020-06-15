@@ -9,5 +9,13 @@ export default new Vuex.Store({
    modules:{
        moduleCount,
        moduleTodo
-   }
+   },
+    getters: {
+        importFrom() {
+            return '导入形式'
+        },
+        storeFrom() {
+            return '$store形式'
+        },
+    },
 })

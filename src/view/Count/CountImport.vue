@@ -1,10 +1,7 @@
 <template>
-    <div class="Index">
-        
+    <div class="CountIndex">
+        <h3>{{importFrom}}</h3>
         <el-form ref="form" label-width="80px">
-            <el-form-item label="">
-                导入形式
-            </el-form-item>
             <el-form-item label="当前值">
                 <!--<p>当前最新数量是[{{count}}]</p>-->
                 <p>{{showNum}}</p>
@@ -45,9 +42,9 @@
         computed: {
             // ...mapState(['count']), //不加module
             ...mapState({
-                count: state =>state.moduleCount.count
+                count: state => state.moduleCount.count
             }),
-            ...mapGetters(['showNum'])
+            ...mapGetters(['showNum','importFrom'])
         },
         methods: {
             ...mapMutations(['addCountMutation', 'reduceCountMutation']),
@@ -81,13 +78,5 @@
 </script>
 
 <style lang="less" scoped>
-    .Index {
-        .count-input {
-            width: 180px;
-        }
-        .input-number {
-            margin-right: 10px;
-        }
-    }
-
+    @import "./../../assets/count-index";
 </style>

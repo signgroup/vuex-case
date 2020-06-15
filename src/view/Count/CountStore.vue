@@ -1,9 +1,7 @@
 <template>
-    <div class="Index">
+    <div class="CountIndex">
+        <h3>{{$store.getters.storeFrom}}</h3>
         <el-form ref="form" label-width="80px">
-            <el-form-item label="">
-                $store形式
-            </el-form-item>
             <el-form-item label="当前值">
                 <!--<p>当前最新数量是[{{$store.state.moduleCount.count}}]</p>-->
                 <p>{{$store.getters.showNum}}</p>
@@ -73,12 +71,5 @@
 </script>
 
 <style lang="less" scoped>
-    .Index {
-        .count-input {
-            width: 180px;
-        }
-        .input-number {
-            margin-right: 10px;
-        }
-    }
+    @import "./../../assets/count-index";
 </style>
