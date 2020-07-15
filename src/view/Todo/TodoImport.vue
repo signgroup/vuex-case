@@ -1,7 +1,7 @@
 <template>
     <div class="TodoIndex">
         <h3>{{importFrom}}</h3>
-        <el-input placeholder="请输入内容" v-model="inputValue" @keyup.enter.native="addItem">
+        <el-input placeholder="请输入内容" v-model.trim="inputValue" @keyup.enter.native="addItem">
             <Select v-model="select" slot="prepend" placeholder="请选择" class="type-select">
                 <Option v-for="item in getTypeOptions" :label="item.name" :value="item.type"></Option>
             </Select>
@@ -36,7 +36,7 @@
                     </Select>
                 </el-form-item>
                 <el-form-item label="当前值">
-                    <el-input placeholder="请输入内容" v-model="itemData.content"/>
+                    <el-input placeholder="请输入内容" v-model.trim="itemData.content"/>
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
@@ -79,7 +79,7 @@
                 this.dialogVisible = true
             },
             addItem() {
-                if (!this.inputValue.trim().length) {
+                if (!this.inputValue.length) {
                     Message({
                         showClose: true,
                         message: '请输入内容',
@@ -88,13 +88,13 @@
                     return
                 }
                 this.addTodoMutation({
-                    content: this.inputValue.trim(),
+                    content: this.inputValue,
                     type: this.select
                 })
                 this.inputValue = ''
             },
             submitUpdate() {
-                if (!this.itemData.content.trim().length) {
+                if (!this.itemData.content.length) {
                     Message({
                         showClose: true,
                         message: '请输入内容',
@@ -109,11 +109,11 @@
             },
             dragEnd(evt) {
                 evt.preventDefault();
-                console.log(this.listDataUpdate)
+                // console.log(this.listDataUpdate)
                 /*console.log('拖动前的索引 :' + evt.oldIndex)
                 console.log('拖动后的索引 :' + evt.newIndex)*/
                 this.updateTodoList(this.listDataUpdate)
-            }
+            },
         },
         mounted() {
             //为了防止火狐浏览器拖拽的时候以新标签打开

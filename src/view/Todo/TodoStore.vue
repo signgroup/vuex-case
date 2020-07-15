@@ -1,9 +1,9 @@
 <template>
     <div class="TodoIndex">
         <h3>{{$store.getters.storeFrom}}</h3>
-        <el-input placeholder="请输入内容" v-model="inputValue" @keyup.enter.native="addItem">
+        <el-input placeholder="请输入内容" v-model.trim="inputValue" @keyup.enter.native="addItem">
             <Select v-model="select" slot="prepend" placeholder="请选择" class="type-select">
-                <Option v-for="item in ($store.getters.getTypeOptions)" :label="item.name" :value="item.type"></Option>
+                <Option v-for="item in ($store.getters.getTypeOptions)" :key="item" :label="item.name" :value="item.type"></Option>
             </Select>
             <el-button slot="append" @click="addItem">添加</el-button>
         </el-input>
@@ -36,7 +36,7 @@
                     </Select>
                 </el-form-item>
                 <el-form-item label="当前值">
-                    <el-input placeholder="请输入内容" v-model="itemData.content"/>
+                    <el-input placeholder="请输入内容" v-model.trim="itemData.content"/>
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
@@ -73,7 +73,7 @@
                 this.dialogVisible = true
             },
             addItem() {
-                if (!this.inputValue.trim().length) {
+                if (!this.inputValue.length) {
                     Message({
                         showClose: true,
                         message: '请输入内容',
@@ -82,13 +82,13 @@
                     return
                 }
                 this.$store.commit('addTodoMutation', {
-                    content: this.inputValue.trim(),
+                    content: this.inputValue,
                     type: this.select
                 })
                 this.inputValue = ''
             },
             submitUpdate() {
-                if (!this.itemData.content.trim().length) {
+                if (!this.itemData.content.length) {
                     Message({
                         showClose: true,
                         message: '请输入内容',

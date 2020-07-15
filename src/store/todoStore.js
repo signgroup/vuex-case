@@ -27,7 +27,6 @@ export const  moduleTodo = {
             state.list.splice(state.list.findIndex(item => item.id === id), 1)
         },
         updateTodoList(state,val){
-            console.log('拖动',val)
             state.list=val
         }
     },
